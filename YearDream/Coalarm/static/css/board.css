@@ -1,0 +1,72 @@
+.corona-board{
+    width: 70%;
+    min-width: 800px;
+    margin: auto;
+}
+/* 버튼 부분 */
+.board-btn{
+    display: flex;
+    justify-content: space-between;
+    margin:0 0 10px 0;
+    font-size: 20px;
+}
+
+
+#board_div{
+    width: 100%; 
+    margin: auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+.new-statistic{
+    color: red;
+    font-size: 15px;
+}
+#board_div th{
+    border: 1px solid black;
+}
+#border-div tr, td{
+    border:1px solid gray;
+}
+.newdata{
+    font-size: 15px;
+    color: red;
+}
+/* 테이블 데이터 부분 */
+#board-data{
+    text-align: center;
+    
+}
+
+/* 펼쳐보기 기능 css */
+.loadall{
+    display: flex;
+    background-color: slateblue;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    height: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.boardtooltip{
+    font-size: 15px;
+    color:#474747;
+}
+/* 대륙선택 부분 */
+#board-select{
+    width: 10rem;
+    font-size: 15px;
+    margin-left: 10px;
+}
+
+@media(max-width:768px) {
+    .board-btn{
+        margin:0 20px 10px 0;
+    }
+    .corona-board {
+        display: none;
+    }
+}

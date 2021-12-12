@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="../static/css/safe-ranking.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="../static/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@500&family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/map.css">
+    <link rel="stylesheet" href="../static/css/top-btn.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+    <link rel="stylesheet" href="../static/css/board.css">
+    <title>Coalarm</title>
+</head>
+<body>
+    <div id='main'>
+        <div id='search'>            
+            <div class="searchcontent">
+                <div class="logo">
+                    <img class='logoimage' src="../static/img/mainlogo.png" alt="">
+                    <div class="logotext">Coalarm</div>
+                </div>
+                <div class="search">
+                    <span>여행할 나라 확인하러 가기</span>
+
+                </div>   
+                <div id="arrowAnim">
+                    <div class="arrowSliding">
+                      <div class="arrow"></div>
+                    </div>
+                    <div class="arrowSliding delay1">
+                      <div class="arrow"></div>
+                    </div>
+                    <div class="arrowSliding delay2">
+                      <div class="arrow"></div>
+                    </div>
+                    <div class="arrowSliding delay3">
+                      <div class="arrow"></div>
+                    </div>
+                  </div>             
+                
+            </div>                 
+        </div>
+        <div class="scroll-top-btn"><i class="fas fa-arrow-circle-up"></i></div>
+        <div id='map-container'>
+            <div class="country-search">
+                <div>✔국가를 클릭 또는 검색하면 상세페이지로 이동합니다.</div>
+                <div>
+                    <input onPropertyChange="test();" type="text" id ="country_search"placeholder="국가 검색" autocomplete="off" required>
+                    <button onclick="searchCountry();">바로가기</button>
+                    <div class="autocomplete"></div>
+                </div>
+            </div>
+            
+
+            <div class="tabbar continent">
+                <div class ='tab world'>전체</div>
+                <div class ='btn'>
+                    <div class="tab Europe">유럽</div>
+                    <div class="dropmenu hidden">
+                        <ul>
+                            <li class="northernEurope">북유럽</li>
+                            <li class="westernEurope">서유럽</li>
+                            <li class="easternEurope">동유럽</li>
+                            <li class="southernEurope">남유럽</li>
+                        </ul>
+                    </div>
+    
+                </div>
+                <div class ='btn'>
+                    <div class="tab Asia">아시아, 중동</div>
+                    <div class="dropmenu hidden">
+                        <ul>
+                            <li class="centralAsia">중앙아시아</li>
+                            <li class="easternAsia">동아시아</li>
+                            <li class="southernAsia">인도</li>
+                            <li class="southEasternAsia">동남아시아</li>
+                            <li class="westernAsia">중동</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class ='btn'>
+                    <div class="tab Americas">미대륙</div>
+                    <div class="dropmenu hidden">
+                        <ul>
+                            <li class="northernAmericas">북아메리카</li>
+                            <li class="caribbean">카리브</li>
+                            <li class="centralAmericas">중앙아메리카</li>
+                            <li class="southAmericas">남아메리카</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class ='btn'>
+                    <div class="tab Oceania">오세아니아</div>
+                    <div class="dropmenu hidden">
+                        <ul>
+                            <li class="australiaAndNewZealand">호주,뉴질랜드</li>
+                            <li class="melanesia">멜라네시아</li>
+                            <li class="micronesia">미크로네시아</li>
+                            <li class="polynesia">폴리네시아</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class ="btn">
+                    <div class="tab Africa">아프리카</div>
+                    <div class="dropmenu hidden">
+                        <ul>
+                            <li class="northernAfrica">북아프리카</li>
+                            <li class="southernAfrica">남아프리카</li>
+                            <li class="easternAfrica">동아프리카</li>
+                            <li class="middleAfrica">중아프리카</li>
+                            <li class="westernAfrica">서아프리카</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="regions_div" style="width: 100%; height: 100%;"></div>   
+         
+        </div>
+        <div class="dividing-line"></div>
+        <div class='ranking-section'>
+            <div class="ranking-head">
+                <div class="sub-head">TOP 3</div>
+                <div class="main-head">여행 안전 점수</div>
+            </div>
+            <div class="ranking-body"></div>
+            <div class="safe-point-description">※<b>안전점수</b>는 코로나 발생률&치명률, 백신접종률, 테러리즘 지수 등을 고려하여 계산된 점수입니다.</div>
+            <div class="safe-point-description" style="margin-top: -29px;">※매시 정각에 데이터가 업데이트됩니다.</div>
+        </div>
+
+        <div class="dividing-line"></div>
+        <div class="corona-board">
+            <div style="font-size: 2.5rem; text-align: center; margin-bottom: -10px;">대륙별 코로나 그래프</div>
+            <div id="chart_div" style="width: 100%; height: 500px; margin: auto"></div>
+            <div class="dividing-line"></div>
+            <div style="font-size: 2.5rem; text-align: center;">코로나 테이블</div>
+            <div class="board-btn">
+                <div>
+                    <div style="display: inline-block;">대륙별로 보기</div>
+                    <select name="board-select" id="board-select">
+                        <option selected='selected'value="all">전체</option>
+                        <option value="Europe">유럽</option>
+                        <option value="Asia">아시아</option>
+                        <option value="North America">북미</option>
+                        <option value="South America">남미</option>
+                        <option value="Oceania">오세아니아</option>
+                        <option value="Africa">아프리카</option>
+                    </select>
+                </div>                
+                <div class="boardtooltip"> <i class="fas fa-info-circle"></i> 발생률: 인구 백만명당 확진자 수</div>
+            </div>
+
+            <table id ='board_div'>
+                <thead >
+                    <th >국가</th>
+                    <th>확진자<span class="newdata">(신규확진)</span></th>
+                    <th>사망자<span class="newdata">(신규사망)</span></th>
+                    <th>회복자<span class="newdata">(신규회복)</span></th>
+                    <th>치명률</th>
+                    <th>회복률</th>
+                    <th class="caseper1millon">발생률 <i class="fas fa-info-circle"></i></th>
+                    <th>1차접종률</th>
+                    <th>2차접종률</th>
+                </thead>
+                <tbody id ='board-data'>
+                    <!-- <tr>
+                        <td>${data[i]["country_x"]}</td>
+                        <td>${data[i]["total_cases"]}<br><span class="new-statistic">${data[i]["new_cases"]}</span></td>
+                        <td>${data[i]["total_deaths"]}<br><span class="new-statistic">${data[i]["new_deaths"]}</span></td>
+                        <td>${data[i]["total_recovered"]}<br><span class="new-statistic">${data[i]["new_recovered"]}</span></td>
+                        <td>${data[i]["critical_ratio"]}</td>
+                        <td>${data[i]["recovered_ratio"]}</td>
+                        <td>${data[i]["total_caeses_per_1million_population"]}</td>
+                        <td>${data[i]["vaccinated"]}</td>
+                        <td>${data[i]["fully_vaccinated"]}</td> 
+                    </tr> -->
+                </tbody>
+                
+            </table>
+            <div class="loadall"> 전체보기 </div>
+        </div>
+
+        <div class="dividing-line footer-line"></div>
+        <footer>
+            <img src="../static/img/coQR.png" alt="">
+            <div class='footer-content'>
+                <div class="footer-title">Coalarm</div>
+                <div class="text-group">
+                    <div><i class="far fa-copyright"> 2021-11-09 ~ 2021-12-02 yeardream project 6team</i></div>
+                    <div><i class="far fa-copyright"></i> created by 김태윤, 최웅수, 정준호, 박병규, 유승아, 박용석</div>
+                </div>
+            </div>
+            
+        </footer>
+    </div>
+
+    
+    
+
+    
+
+    
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="../static/js/map.js"></script>
+    <script src="../static/js/main.js"></script>
+    <script src="../static/js/safe-ranking.js"></script>
+    <script src="../static/js/board.js"></script>
+    <script src="../static/js/top-btn.js"></script>
+</body>
+</html>

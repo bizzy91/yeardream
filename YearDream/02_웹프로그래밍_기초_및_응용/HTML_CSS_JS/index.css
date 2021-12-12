@@ -1,0 +1,42 @@
+/* Type Selector */
+h1 { background-color: yellow; }
+
+/* Class Selector */
+.coding { color: red; }
+
+/* ID Selector */
+#coding { color: red; }
+
+/* Inheritance */
+header { color: red; }
+header h2 { color: green; }
+/* <h1>의 속성값은 green */
+
+/* 
+Cascading
+
+1. 나중에 작성한 코드가 우선 순위를 갖는다.
+    p { color: red; } 
+    p { color: blue; } <-
+
+2. 더 구체적으로 작성한 코드가 우선 순위를 갖는다.
+    h3 { color: red; }
+    header h3 { color: blue; } <-
+
+3. style > id > class > type
+    h3 { color: green; }                   <- type
+    .coding { color: blue; }               <- class
+    #coding { color: blue; }               <- id
+    <style> h1 { color: blue; } <style>    <-stylpe
+*/
+
+
+.paragraph { 
+    width: 500px; 
+    height: 100px;
+    font-size: 50px;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    }
+    

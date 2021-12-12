@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JINJA Practice</title>
+</head>
+
+<body>
+    <!-- Data -->
+    <h2>과일</h2>
+    <p>
+        {{ fruit }}
+    </p>
+    <hr width="100%">
+    <!-- Data (List) -->   
+    <h2>Add Fruit</h2>
+    <form action="/" method="POST">
+        <p>
+            <input name='fruit'>
+        </p>
+        <button type="submit"> ADD </button>
+    </form>
+    
+    <h5>한 번에 출력하기</h5>
+    <p>
+    {{ fruit_list }}
+    </p>
+
+    <h5>한 개씩 출력하기</h5>
+    {% for fruit in fruit_list %}
+        <p> {{ fruit }} </p>
+    {% endfor %}
+    <hr width="100%">
+    <!-- Data (Dictionary) -->
+    <h4>강의 이름</h4>
+    <p>{{ lecture_info['name'] }}</p>
+    <h4>강의 시간</h4>
+    <p>{{ lecture_info['time'] }}</p>
+    <h4>강의 난이도</h4>
+    <p>{{ lecture_info['level'] }}</p>
+    <h4>강의 언어</h4>
+    <p>{{ lecture_info['lan'] }}</p>
+
+</body>
+
+</html>

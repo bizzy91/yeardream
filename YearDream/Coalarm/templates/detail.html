@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/33c671eab1.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="../static/img/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@500&family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+    <link rel="stylesheet" href="../static/css/top-btn.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+    <link rel="stylesheet" href="../static/css/main.css">
+    <link rel="stylesheet" href="../static/css/detail.css">
+    <title>Coalarm</title>
+</head>
+<body>
+  <div class="body-container">
+    <header>
+      <a href="/">
+        <div class="logo-group">
+          <img class="logo-img" src="../static/img/mainlogo.png"></img>&ensp;
+          <div class="logo-name">Coalarm</div>
+        </div>
+      </a>      
+    </header>
+    <div class="scroll-top-btn-detail"><i class="fas fa-arrow-circle-up"></i></div>
+    <div class="content-position">
+      <div class="content-group">
+        <section class="visual-content">
+          <div class="coutry-name">{{data['name']}} <span class="flag"></span></div>
+          <div class="chart-group">
+            <div class="chart1">
+              <div class="total">
+                <div>코로나 누적 통계</div>
+                <div>누적 확진자 : <span class="coronadata">{{data['corona']['total_cases']}}</span></div>
+                <div>누적 사망자 : <span class="coronadata">{{data['corona']['total_deaths']}}</span></div>
+                <div>누적 회복자 : <span class="coronadata">{{data['corona']['total_recovered']}}</span></div>
+              </div>
+              <div class="new">
+                <div>코로나 신규 통계</div>
+                <div>신규 확진자 : <span class="coronadata">{{data['corona']['new_cases']}}</span></div>
+                <div>신규 사망자 : <span class="coronadata">{{data['corona']['new_deaths']}}</span></div>
+                <div>신규 회복자 : <span class="coronadata">{{data['corona']['new_recovered']}}</span></div>
+              </div>
+              <div class="safe-point-group">  
+                <div class="safe-point-head">안전점수 <i class="fas fa-info-circle"></i></div>
+                <div class="safe-point middle">{{data['safe']['score']}}</div>
+                <div class="tooltip fadeout">
+                  <p>&emsp;※ 안전점수 계산에 활용된 데이터: <br>
+                    &ensp;•코로나 발생률 &ensp;•코로나 회복률 &emsp;•코로나 치명률<br>
+                    &ensp;•테러리즘지수&emsp;•치안 안전 점수&emsp;&ensp;•살인율<br>
+                    &ensp;•백신접종률&emsp;&emsp;•여행경보&emsp;&emsp;&emsp;&ensp; •Numbeo
+                  </p>
+                </div> 
+              </div>
+            </div>
+            <div id="container" class="chart2">
+              <div id="chart2Data1" class="hidden">{{data['vaccine']['vaccinated']}}</div>
+              <div id="chart2Data2" class="hidden">{{data['vaccine']['fully_vaccinated']}}</div>
+            </div>
+            <div class="exchange-rate">
+              <div>기준환율</div>
+              <div>1 {{data['exchange'][1]}} : <span class="rate">{{data['exchange'][0]}}</span>원<br><span class="rate-comment">해당 국가의 환율정보가 없으면 미국 달러로 표시됩니다.</span></div>               
+              <div class="calculator">
+                <div><p>한국 원</p><input class="exchangefrom" type="number"></div>
+                <img class='reverse-cal'src="../static/img/twowayarrow.png" alt="">
+                <div><p>{{data['exchange'][1]}}</p><p class="exchangeto">0</p></div>
+              </div>
+
+            </div>
+            <div class="embassy">
+              <div> 재외공관 바로가기 </div>
+              <!-- 대사관 데이터 입력-->
+              {% if data['embassy'] ==[] %}
+                <div>대사관 정보가 없습니다.</div>
+              {% else %}
+                {% for i in data['embassy'] %}
+                  <div class="embassydata"><a target="_blank" rel="noopener noreferrer" href="{{i['url']}}">{{i['embassy_kor_nm']}}</a></div>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </section>
+        
+        <section class="information-content">
+          <div class="info-help">
+            <div>
+              코로나 관련 <b>요약 정보</b>별로 확인해보세요.<br>❗꼭 <b>전체</b> 정보를 확인하세요
+            </div>
+            <div class="information-tab">
+              <div class="summary tab active">요약</div>
+              <div class="allcontent tab">전체</div>
+            </div>
+          </div>
+        
+          <div class="inbound category-group">
+            <div class="category-title">입국관련<span class="click-guide">click</span></div>
+            <div class="category-description look">
+              {% if data['notice'] == "no data" %}
+                <p class='content'>정보가 없습니다.</p>
+              {% else %}
+                {% for i in data['notice']['inbound'] %}
+                <p class='content'>{{i}}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="document category-group">
+            <div class="category-title">필요서류<span class="click-guide">click</span></div>
+            <div class="category-description look">
+              {% if data['notice'] == "no data" %}
+                <p class='content'>정보가 없습니다.</p>
+              {% else %}
+                {% for i in data['notice']['document'] %}
+                <p class='content'>{{i}}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="isolate category-group">
+            <div class="category-title">격리관련<span class="click-guide">click</span></div>
+            <div class="category-description look">
+              {% if data['notice'] == "no data" %}
+                <p class='content'>정보가 없습니다.</p>
+              {% else %}
+                {% for i in data['notice']['isolate'] %}
+                <p class='content'>{{i}}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="vias category-group">
+            <div class="category-title">비자관련<span class="click-guide">click</span></div>
+            <div class="category-description look">
+              {% if data['notice'] == "no data" %}
+                <p class='content'>정보가 없습니다.</p>
+              {% else %}
+                {% for i in data['notice']['visa'] %}
+                <p class='content'>{{i}}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+          <div class="all category-group hidden">
+            <div class="category-title">전체<span class="click-guide">click</span></div>
+            <div class="category-description look">
+              {% if data['allnotice'] == "no data" %}
+                <p class='content'>정보가 없습니다.</p>
+              {% else %}
+                {% for i in data['allnotice'] %}
+                <p class='content'>{{i}}</p>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </section>
+      </div>
+        <section class="comment-content">
+
+          <div class="comment-menu">
+            <div class="comment-count"></div>
+            <div class="comment-resent" onclick="commentResentDeactivation()"><i class="fas fa-history"></i>
+            </div>
+          </div>
+
+          <form class="comment-input-group">
+            <input type="text" class="input-nickname" oninput="btnActive()" placeholder="닉네임 입력...">
+            <textarea class="input-comment" oninput="btnActive()" onkeydown="resize(this)" onkeyup="resize(this)"  rows="1" type="text" placeholder="공개 댓글 추가..."></textarea>
+            <input type="text" class="input-pw" oninput="btnActive()" placeholder="비밀번호 입력...">
+            <div class="btn-group">
+              <button type="reset" onclick="btnReset()" class="btn btn-reset">취소</button>
+              <button type="button" onclick="addComment(0)" class="btn btn-submit" disabled>댓글</button>
+            </div>
+          </form>
+
+          <div class="comment-list"></div>
+          
+
+        </section>
+      </div>
+      <div class="dividing-line footer-line"></div>
+      <footer class="footer-detail">
+        <img src="../static/img/coQR.png" alt="">
+        <div class='footer-content'>
+            <div class="footer-title">Coalarm</div>
+            <div class="text-group">
+                <div><i class="far fa-copyright"> 2021-11-09 ~ 2021-12-02 yeardream project 6team</i></div>
+                <div><i class="far fa-copyright"></i> created by 김태윤, 최웅수, 정준호, 박병규, 유승아, 박용석</div>
+            </div>
+        </div>
+          
+      </footer>
+  
+  </div>
+  <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  
+  <script src="../static/js/detail.js"></script>
+  <script src="../static/js/comment.js"></script>
+  <script src="../static/js/top-btn.js"></script>
+</body>
+</html>
